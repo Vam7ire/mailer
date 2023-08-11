@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email sender</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="card text-center">
+    <div class="card-header">
+      WELCOME
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Send mail to multiple Recipients at one click</h5>
+      <p class="card-text">More features are on the way.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Ip Status</h5>
+          <p class="card-text">Mailer</p>
+          <p class="card-text">Data Status</p>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Input IP</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Input required information</h5>
+          <div>
+            <input type="radio" id="testRadio" name="radioType" value="test" checked required><label
+              for="testRadio">Test</label>
+            <input type="radio" id="bulkRadio" name="radioType" value="bulk" required><label
+              for="bulkRadio">Bulk</label>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">@</span>
+            </div>
+            <input type="text" id="userEmail" class="form-control" placeholder="Username" aria-label="Username"
+              aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="text" id="recipientEmails" class="form-control" placeholder="Recipient's username"
+              aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">@example.com</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Subject</span>
+            </div>
+            <input type="text" id="subject" class="form-control" placeholder="Subject" aria-label="Subject"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">From</span>
+            </div>
+            <input type="text" id="from" class="form-control" placeholder="From" aria-label="From"
+              aria-describedby="basic-addon1">
+          </div>
+
+          <h4>Type</h4>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="plain" name="content-type" class="custom-control-input" value="plain">
+            <label class="custom-control-label" for="plain">plain</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="html" name="content-type" class="custom-control-input" value="html">
+            <label class="custom-control-label" for="html">Html</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="mime" name="content-type" class="custom-control-input" value="mime">
+            <label class="custom-control-label" for="mime">mime</label>
+          </div>
+          <!-- Add the modal markup at the end of your HTML body -->
+          <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="previewModalLabel">Email Body Preview</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <pre id="previewContent"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add a button to trigger the modal -->
+          <button type="button" id="previewBtn" class="btn btn-primary" data-toggle="modal" data-target="#previewModal">
+            Preview mail
+          </button>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Body</span>
+            </div>
+            <textarea id="body" class="form-control" placeholder="Body" aria-label="Body"
+              aria-describedby="basic-addon1"></textarea>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Header</span>
+            </div>
+            <textarea type="text" id="header" class="form-control" placeholder="Header" aria-label="Body"
+              aria-describedby="basic-addon1"></textarea>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Test Email</span>
+            </div>
+            <input type="text" id="test_email" class="form-control" placeholder="Test Email" aria-label="Test Email"
+              aria-describedby="basic-addon1">
+          </div>
+          <h4>Send Option:</h4>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="auto" name="auto" class="custom-control-input">
+            <label class="custom-control-label" for="auto">Auto</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="manual" name="manual" class="custom-control-input">
+            <label class="custom-control-label" for="manual">Manual</label>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="Limit">Limit</span>
+            </div>
+            <input type="number" class="form-control" placeholder="Enter Limit" aria-label="Enter Limit"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="Limit-to-send">Limit-to-send</span>
+            </div>
+            <input type="number" class="form-control" placeholder="Limit to send" aria-label="Limit to send"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="offer_id">Offer id</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Offer Id" aria-label="Offer_Id"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="message_id">Message id</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Message Id" aria-label="message_Id"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="domain">Domain</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Domain" aria-label="domain"
+              aria-describedby="basic-addon1">
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="smtp" name="send-method" class="custom-control-input" value="smtp">
+            <label class="custom-control-label" for="smtp">SMTP</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="api" name="send-method" class="custom-control-input" value="api">
+            <label class="custom-control-label" for="api">API</label>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm">Create Link</button>
+          <button type="button" class="btn btn-secondary btn-sm">Open</button>
+          <button type="button" onclick="sendEmail()" class="btn btn-secondary btn-sm">Send Mail</button>
+          <div id="response"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function sendEmail() {
+      const userEmail = document.getElementById('userEmail').value;
+      const fromAddress = document.getElementById('from').value;
+
+      const subject = document.getElementById('subject').value;
+      const body = document.getElementById('body').value;
+      const contentType = document.querySelector('input[name="content-type"]:checked').value;
+
+      let recipientEmails = document.getElementById('recipientEmails').value;
+      const testRadio = document.getElementById('testRadio');
+      const bulkRadio = document.getElementById('bulkRadio');
+
+      if (testRadio.checked) {
+        // Limit recipientEmails to 5 recipients for the "Test" mode
+        const recipientList = recipientEmails.split(',').slice(0, 100);
+        recipientEmails = recipientList.join(',');
+      }
+
+
+
+      let emailBody;
+
+      if (contentType === 'html') {
+        emailBody = body;
+      } else if (contentType === 'plain') {
+        emailBody = body.replace(/(<([^>]+)>)/gi, '');
+      } else if (contentType === 'mime') {
+        emailBody = body; // You can format the MIME content as needed
+      }
+
+      // emailjs.send("service_w0qbv9l", "template_z7w7bc8", {
+      //   to_email: recipientEmails,
+      //   from_email: userEmail,
+      //   subject: subject,
+      //   body: emailBody
+      // })
+      //   .then(function (response) {
+      //     const responseDiv = document.getElementById('response');
+      //     responseDiv.textContent = 'Email sent successfully!';
+      //     responseDiv.style.color = 'green';
+      //   }, function (error) {
+      //     console.error('Error sending email:', error);
+      //     const responseDiv = document.getElementById('response');
+      //     responseDiv.textContent = 'An error occurred while sending the email.';
+      //     responseDiv.style.color = 'red';
+      //   });
+
+      const sendMethod = document.querySelector('input[name="send-method"]:checked').value;
+
+      fetch('/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ recipientEmails, subject, body: emailBody, userEmail, sendMethod }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const responseDiv = document.getElementById('response');
+        responseDiv.textContent = data.message;
+        if (data.success) {
+          responseDiv.style.color = 'green';
+        } else {
+          responseDiv.style.color = 'red';
+        }
+      })
+      .catch((error) => console.error('Error sending email:', error));
+    }
+
+    
+
+    function updatePreviewModal() {
+      const body = document.getElementById('body').value;
+      const contentType = document.querySelector('input[name="content-type"]:checked').value;
+
+      let previewContent = '';
+
+      if (contentType === 'html') {
+        previewContent = body;
+      } else if (contentType === 'plain') {
+        previewContent = body.replace(/(<([^>]+)>)/gi, '');
+      } else if (contentType === 'mime') {
+        previewContent = body;
+      }
+      const previewElement = document.getElementById('previewContent');
+      previewElement.innerHTML = previewContent;
+    }
+    document.getElementById('previewBtn').addEventListener('click', updatePreviewModal);
+  </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
